@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do apt-get remove $pkg
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do apt-get remove $pkg || true; done
 
 apt-get update
 apt-get install -y ca-certificates curl gnupg build-essential curl git libicu-dev lsb-release
@@ -22,6 +22,6 @@ apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin do
 
 docker run hello-world
 
-RUN mkdir -p /usr/local/lib/docker/cli-plugins && \
+mkdir -p /usr/local/lib/docker/cli-plugins && \
 	curl -SL https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64 -o /usr/local/lib/docker/cli-plugins/docker-compose && \
 	chmod +x /usr/local/lib/docker/cli-plugins/docker-compose

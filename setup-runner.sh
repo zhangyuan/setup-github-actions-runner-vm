@@ -4,7 +4,7 @@ set -euo pipefail
 
 RUNNER_USERNAME=${RUNNER_USERNAME:-ci}
 
-TARGET_DIRECTORY=$HOME/actions-runner
+
 
 mkdir -p ${TARGET_DIRECTORY}
 
@@ -14,6 +14,8 @@ mkdir -p ${TARGET_DIRECTORY}
     tar xzf ./actions-runner-linux-x64-2.310.2.tar.gz && rm ./actions-runner-linux-x64-2.310.2.tar.gz)
 
 (cd ${TARGET_DIRECTORY} && \
-  ./config.sh --unattended --url "$REPO_URL" --token "$REGISTRATION_TOKEN" --name "${RUNNER_NAME}" --labels "${RUNNER_TABLES:-vm}" --replace
+  ./config.sh \
+  --unattended --url "$REPO_URL" --token "$REGISTRATION_TOKEN" \
+  --name "${RUNNER_NAME}" --labels "${RUNNER_TABLES:-vm}" --replace)
 
-(cd ${TARGET_DIRECTORY} && sudo ./svc.sh install ${RUNNER_USERNAME} && ./svc.sh start && ./svc.sh status)
+(cd ${TARGET_DIRECTORY} && sudo ./svc.sh install ${RUNNER_USERNAME} && sudo ./svc.sh start && sudo ./svc.sh status)
