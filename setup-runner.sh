@@ -4,7 +4,7 @@ set -euo pipefail
 
 RUNNER_USERNAME=${RUNNER_USERNAME:-ci}
 
-
+TARGET_DIRECTORY=$HOME/actions-runner
 
 mkdir -p ${TARGET_DIRECTORY}
 
